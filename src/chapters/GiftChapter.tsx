@@ -163,18 +163,34 @@ export const GiftChapter: React.FC = () => {
 
       {/* TOP SECTION (Upper third of viewport) */}
       <div className="absolute top-10 md:top-14 left-0 right-0 z-20 flex flex-col items-center text-center px-6 max-w-xl mx-auto select-none pointer-events-none">
-        <span className="text-xs uppercase tracking-[0.25em] text-zinc-550 mb-3 font-semibold">
-          One last surprise...
-        </span>
+        <AnimatePresence mode="popLayout">
+          {(revealStage === 'idle' || revealStage === 'anticipating') && (
+            <motion.div
+              key="active-header"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+              className="flex flex-col items-center"
+            >
+              <h1 className="font-serif text-3xl md:text-4xl font-light mb-2 tracking-tight leading-tight">
+                One Last Surprise...
+              </h1>
+              <p className="text-zinc-400 text-sm font-light px-4 leading-relaxed h-12 flex items-center justify-center mb-10">
+                {isAnticipating
+                  ? 'Something is happening...'
+                  : `This gift is especially for you, ${recipientName}`}
+              </p>
+            </motion.div>
+          )}
 
-        <AnimatePresence mode="wait">
-          {revealStage === 'congratulating' ? (
+          {revealStage === 'congratulating' && (
             <motion.div
               key="congrats-header"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }}
               className="flex flex-col items-center"
             >
               <h1 className="font-serif text-[clamp(1.5rem,5.5vw,2.5rem)] font-light text-amber-250 tracking-wide leading-tight mb-2 px-4 text-center">
@@ -184,25 +200,6 @@ export const GiftChapter: React.FC = () => {
               </h1>
               <p className="text-zinc-400 text-sm font-light leading-relaxed">
                 Best wishes to you!
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="active-header"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-col items-center"
-            >
-              <h1 className="font-serif text-3xl md:text-4xl font-light mb-2 tracking-tight leading-tight">
-                One Last Surprise...
-              </h1>
-              <p className="text-zinc-400 text-sm font-light px-4 leading-relaxed h-12 flex items-center justify-center mb-10">
-                {isBoxOpen
-                  ? 'Watch closely...'
-                  : isAnticipating
-                  ? 'Something is happening...'
-                  : `This gift is especially for you, ${recipientName}`}
               </p>
             </motion.div>
           )}
