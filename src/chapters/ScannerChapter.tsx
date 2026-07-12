@@ -73,6 +73,7 @@ export const ScannerChapter: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [isScanning, setIsScanning] = useState(false);
   const [scanComplete, setScanComplete] = useState(false);
+  const [showConfirmationText, setShowConfirmationText] = useState(false);
   const [interrupted, setInterrupted] = useState(false);
   const [confetti, setConfetti] = useState<ConfettiParticle[]>([]);
 
@@ -123,10 +124,22 @@ export const ScannerChapter: React.FC = () => {
     if (scanComplete) {
       const timer = setTimeout(() => {
         nextChapter();
-      }, 1200);
+      }, 1650);
       return () => clearTimeout(timer);
     }
   }, [scanComplete, nextChapter]);
+
+  // Delay confirmation text reveal
+  useEffect(() => {
+    if (scanComplete) {
+      const timer = setTimeout(() => {
+        setShowConfirmationText(true);
+      }, 450);
+      return () => clearTimeout(timer);
+    } else {
+      setShowConfirmationText(false);
+    }
+  }, [scanComplete]);
 
   const startScan = (e: React.MouseEvent | React.TouchEvent) => {
     if (scanComplete) return;
@@ -144,7 +157,8 @@ export const ScannerChapter: React.FC = () => {
   };
 
   const getSubMessage = () => {
-    if (scanComplete) return 'Birthday Status: Confirmed ✅';
+    if (showConfirmationText) return 'Birthday Status: Confirmed ✅';
+    if (scanComplete) return '';
     if (isScanning) {
       if (progress < 15) return 'Checking birthday database...';
       if (progress < 30) return 'Verifying cake eligibility...';
@@ -183,7 +197,7 @@ export const ScannerChapter: React.FC = () => {
         </span>
         
         <h1 className="font-serif text-4xl md:text-5xl font-light mb-6 tracking-tight leading-tight transition-colors duration-500">
-          {scanComplete ? (
+          {showConfirmationText ? (
             <span className="text-emerald-400 font-medium">Birthday Confirmed</span>
           ) : (
             'Birthday Verification'
@@ -286,14 +300,17 @@ export const ScannerChapter: React.FC = () => {
             <AnimatePresence>
               {isScanning && (
                 <motion.div
-                  initial={{ y: -45 }}
-                  animate={{ y: 45 }}
-                  exit={{ y: -45 }}
+                  initial={{ y: -45, opacity: 0 }}
+                  animate={{ y: 45, opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{
-                    repeat: Infinity,
-                    repeatType: 'reverse',
-                    duration: 1.6,
-                    ease: 'easeInOut',
+                    y: {
+                      repeat: Infinity,
+                      repeatType: 'reverse',
+                      duration: 1.6,
+                      ease: 'easeInOut',
+                    },
+                    opacity: { duration: 0.3 }
                   }}
                   className="absolute left-0 right-0 h-[2px] bg-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.8)] z-20 pointer-events-none"
                 />
@@ -301,12 +318,29 @@ export const ScannerChapter: React.FC = () => {
             </AnimatePresence>
 
             {/* Fingerprint Vector Icon */}
-            <svg
+            <motion.svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1}
               stroke="currentColor"
+              animate={
+                scanComplete
+                  ? {
+                      scale: [1, 1.22, 0.96, 1.04, 1],
+                      filter: [
+                        'drop-shadow(0 0 0px rgba(16, 185, 129, 0))',
+                        'drop-shadow(0 0 8px rgba(16, 185, 129, 0.6))',
+                        'drop-shadow(0 0 0px rgba(16, 185, 129, 0))',
+                      ],
+                    }
+                  : {}
+              }
+              transition={{
+                duration: 0.85,
+                ease: 'easeInOut',
+                delay: 0.25,
+              }}
               className={`w-12 h-12 transition-colors duration-300 pointer-events-none ${
                 scanComplete
                   ? 'text-emerald-400'
@@ -320,7 +354,7 @@ export const ScannerChapter: React.FC = () => {
                 strokeLinejoin="round"
                 d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.272M6 10.5c0-2.208 1-4.183 2.592-5.5M6 10.5c0 2.92.556 5.709 1.568 8.272M6 10.5c-.714 0-1.393-.153-2-.43M18 10.5c0-2.208-1-4.183-2.592-5.5m2.592 5.5a14.28 14.28 0 0 1-1.568 8.272M18 10.5c.714 0 1.393-.153 2-.43M13.5 10.5c0-1.104-.5-2-1.5-2s-1.5.896-1.5 2M13.5 10.5c0 1.942-.256 3.824-.742 5.623M10.5 10.5c0 1.942.256 3.824.742 5.623m-1.484-5.623c-.362 0-.693-.093-1-.258M12 10.5c0-2.208 1.5-4 3.5-4s3.5 1.792 3.5 4M12 10.5c0 2.92.556 5.709 1.568 8.272"
               />
-            </svg>
+            </motion.svg>
           </motion.div>
         </div>
 
