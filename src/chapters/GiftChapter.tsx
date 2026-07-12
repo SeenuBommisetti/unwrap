@@ -358,6 +358,17 @@ export const GiftChapter: React.FC = () => {
       {/* BOTTOM SECTION (Grounded Box near lower third of viewport) */}
       <div className="absolute bottom-10 md:bottom-14 left-0 right-0 z-10 flex flex-col items-center select-none">
         <div className="relative w-64 h-48 flex flex-col justify-end items-center">
+          {/* Ambient Shadow beneath Box */}
+          <motion.div
+            animate={
+              isBoxOpen
+                ? { scale: 0.7, opacity: 0 }
+                : { scale: [0.95, 1.08, 0.95], opacity: [0.4, 0.22, 0.4] }
+            }
+            transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
+            className="absolute bottom-[-10px] w-36 h-3 bg-black/50 rounded-full blur-md z-0 pointer-events-none"
+          />
+
           {/* Gift Box Base & Lid wrapper */}
           <motion.div
             animate={
@@ -372,6 +383,7 @@ export const GiftChapter: React.FC = () => {
                   }
                 : {
                     y: [-6, 6, -6],
+                    rotate: [-0.5, 0.5, -0.5],
                   }
             }
             transition={
@@ -393,10 +405,10 @@ export const GiftChapter: React.FC = () => {
                   : { y: 0 }
               }
               transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }}
-              className="w-40 h-10 bg-rose-500 rounded-t-md relative z-20 flex justify-center shadow-md border-b border-rose-600/30"
+              className="w-40 h-10 bg-gradient-to-r from-indigo-950 via-indigo-900 to-indigo-950 rounded-t-lg relative z-20 flex justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.1),_0_4px_8px_rgba(0,0,0,0.35)] border-t border-indigo-500/10 border-b border-indigo-950/40"
             >
               {!ribbonDragged && (
-                <div className="w-6 h-full bg-amber-400 shadow-inner" />
+                <div className="w-6 h-full bg-gradient-to-r from-amber-600 via-amber-350 to-amber-600 shadow-[inset_0_0_4px_rgba(0,0,0,0.2)]" />
               )}
             </motion.div>
 
@@ -407,7 +419,7 @@ export const GiftChapter: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="w-36 h-[2px] bg-amber-200 shadow-[0_0_10px_#f59e0b] z-25 absolute top-[39px]"
+                  className="w-36 h-[3px] bg-amber-250 shadow-[0_0_14px_#f59e0b] z-25 absolute top-[39px]"
                 />
               )}
             </AnimatePresence>
@@ -420,14 +432,16 @@ export const GiftChapter: React.FC = () => {
                   : { scaleY: 1 }
               }
               transition={{ duration: 0.8, ease: 'easeInOut' }}
-              className="w-36 h-36 bg-rose-600 rounded-b-md relative z-10 flex justify-center shadow-lg overflow-hidden"
+              className="w-36 h-36 bg-gradient-to-b from-indigo-900 via-indigo-950 to-zinc-950 rounded-b-xl relative z-10 flex justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),_0_10px_30px_rgba(0,0,0,0.5)] border-x border-b border-indigo-950/40 overflow-hidden"
             >
+              {/* Vertical Base Ribbon */}
               {!ribbonDragged && (
-                <div className="w-6 h-full bg-amber-400 shadow-inner z-10" />
+                <div className="w-6 h-full bg-gradient-to-r from-amber-600 via-amber-350 to-amber-600 shadow-[inset_0_0_4px_rgba(0,0,0,0.2)] z-10" />
               )}
 
+              {/* Horizontal Base Ribbon */}
               {!ribbonDragged && (
-                <div className="absolute top-[40%] left-0 right-0 h-6 bg-amber-400 shadow-inner z-10" />
+                <div className="absolute top-[40%] left-0 right-0 h-6 bg-gradient-to-b from-amber-600 via-amber-350 to-amber-600 shadow-[inset_0_0_4px_rgba(0,0,0,0.2)] z-10" />
               )}
 
               {/* Glowing pool inside box */}
@@ -435,8 +449,10 @@ export const GiftChapter: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="absolute inset-1.5 bg-gradient-to-b from-amber-300 to-amber-500 rounded-md blur-[2px] z-0 flex items-center justify-center text-zinc-950 font-bold font-serif shadow-[0_0_30px_rgba(245,158,11,0.5)]"
-                />
+                  className="absolute inset-1.5 bg-gradient-to-t from-amber-950 via-amber-700 to-amber-500 rounded-md z-0 shadow-[inset_0_4px_20px_rgba(0,0,0,0.85)] flex items-center justify-center"
+                >
+                  <div className="absolute inset-0 bg-radial from-amber-350/45 via-transparent to-transparent blur-md pointer-events-none animate-pulse" />
+                </motion.div>
               )}
             </motion.div>
 
@@ -453,25 +469,71 @@ export const GiftChapter: React.FC = () => {
                     }
                   }}
                   exit={{ y: -300, opacity: 0, transition: { duration: 0.8, ease: 'easeOut' } }}
-                  whileHover={{ scale: 1.08 }}
+                  whileHover={{ scale: 1.06 }}
                   whileTap={{ scale: 0.95 }}
-                  className="absolute -top-7 z-30 cursor-grab active:cursor-grabbing flex flex-col items-center animate-pulse"
+                  className="absolute -top-10 z-30 cursor-grab active:cursor-grabbing flex flex-col items-center"
                 >
                   <svg
-                    viewBox="0 0 100 60"
-                    className="w-20 h-12 text-amber-450 drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)] fill-current"
+                    viewBox="0 0 120 70"
+                    className="w-24 h-14 drop-shadow-[0_6px_10px_rgba(0,0,0,0.4)] fill-current"
                   >
-                    <path d="M 50 30 C 20 5, 10 30, 50 30" stroke="#b45309" strokeWidth="1" />
-                    <path d="M 50 30 C 80 5, 90 30, 50 30" stroke="#b45309" strokeWidth="1" />
-                    <circle cx="50" cy="30" r="8" fill="#fbbf24" stroke="#b45309" strokeWidth="1.2" />
-                    <path d="M 46 34 L 30 55 L 42 50 L 48 38" fill="#fbbf24" />
-                    <path d="M 54 34 L 70 55 L 58 50 L 52 38" fill="#fbbf24" />
+                    <defs>
+                      <linearGradient id="gold-satin" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#d97706" />
+                        <stop offset="30%" stopColor="#fef08a" />
+                        <stop offset="50%" stopColor="#b45309" />
+                        <stop offset="70%" stopColor="#fef08a" />
+                        <stop offset="100%" stopColor="#78350f" />
+                      </linearGradient>
+                      <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.35" />
+                      </filter>
+                    </defs>
+                    {/* Left Loop */}
+                    <path
+                      d="M 60 35 C 30 10, 10 30, 60 35"
+                      fill="url(#gold-satin)"
+                      stroke="#92400e"
+                      strokeWidth="0.5"
+                      filter="url(#soft-shadow)"
+                    />
+                    {/* Right Loop */}
+                    <path
+                      d="M 60 35 C 90 10, 110 30, 60 35"
+                      fill="url(#gold-satin)"
+                      stroke="#92400e"
+                      strokeWidth="0.5"
+                      filter="url(#soft-shadow)"
+                    />
+                    {/* Center Knot */}
+                    <circle
+                      cx="60"
+                      cy="35"
+                      r="9"
+                      fill="url(#gold-satin)"
+                      stroke="#92400e"
+                      strokeWidth="0.75"
+                    />
+                    {/* Left Tail */}
+                    <path
+                      d="M 56 38 C 45 48, 35 52, 28 62 L 38 60 L 46 48 Z"
+                      fill="url(#gold-satin)"
+                      stroke="#92400e"
+                      strokeWidth="0.25"
+                    />
+                    {/* Right Tail */}
+                    <path
+                      d="M 64 38 C 75 48, 85 52, 92 62 L 82 60 L 74 48 Z"
+                      fill="url(#gold-satin)"
+                      stroke="#92400e"
+                      strokeWidth="0.25"
+                    />
                   </svg>
                   
                   <motion.span
                     animate={{ y: [-2, 2, -2] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
-                    className="text-[9px] text-amber-300 font-bold uppercase tracking-widest bg-zinc-950/80 px-2.5 py-0.5 rounded-full border border-amber-500/20 mt-1 pointer-events-none"
+                    className="text-[9px] text-amber-300 font-bold uppercase tracking-widest bg-zinc-950/80 px-2.5 py-0.5 rounded-full border border-amber-500/20 mt-2.5 pointer-events-none shadow-md"
                   >
                     Drag Up
                   </motion.span>
