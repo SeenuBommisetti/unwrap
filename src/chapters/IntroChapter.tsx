@@ -170,8 +170,8 @@ export const IntroChapter: React.FC = () => {
               <p className="font-serif text-2xl md:text-4xl font-light text-zinc-300 tracking-wide leading-relaxed max-w-lg mb-4 text-center">
                 Then someone sent you the wrong surprise 😄
               </p>
-              <p className="text-zinc-500 text-xs font-light tracking-widest uppercase">
-                Redirecting
+              <p className="text-zinc-500 text-xs font-light tracking-widest">
+                Redirecting...
               </p>
             </motion.div>
           )}
