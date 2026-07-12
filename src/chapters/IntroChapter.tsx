@@ -232,9 +232,9 @@ export const IntroChapter: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.0, ease: 'easeOut', delay: 1.0 }}
-                className="text-zinc-500 text-[10px] md:text-xs font-light mt-6 tracking-widest uppercase text-center"
+                className="text-zinc-500 text-[10px] md:text-xs font-light mt-6 tracking-widest text-center"
               >
-                Initializing Verification Sequence
+                Let's make sure it's really you...
               </motion.p>
             </motion.div>
           )}
