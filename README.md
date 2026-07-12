@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# unwrap.
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive, cinematic birthday card experience built with React, TypeScript, Tailwind CSS, and Framer Motion. 
 
-Currently, two official plugins are available:
+Allows users to create a personalized link containing the recipient's and sender's names, skip the generator to directly load the surprise, and experience a step-by-step birthday journey.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Personalization Form**: A premium midnight-styled generator screen to configure Recipient and Sender names.
+- **Link Sharing**: Generates unique URLs (`?to=Sarah&from=Seenu`) with built-in clipboard copying feedback.
+- **Cinematic Prologue**: Welcomes the recipient with custom greeting transitions.
+- **Biometric Scanner Simulation**: A press-and-hold fingerprint verification phase featuring vertical lasers, success ring loading, and an emerald-green confirmation pulse.
+- **Lucky Balloon Pop**: A vector-based popping game to charge up the party energy.
+- **Interactive Blow-Out Wicks**: Cake-blowing wicks reacting to tap signals or sound triggers.
+- **Magical Gift Reveal**: A 3D-styled absolute layout containing ribbon drag gestures, lid animations, rising golden stars, and morphing cake icons.
+- **Final Message Greeting Card**: A staggered typography layout showing personalized wishes from the sender with replay loops.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the Oxlint configuration
+- **Framework**: React 19 + TypeScript
+- **Bundler**: Vite
+- **Styling**: Tailwind CSS v4 + Vanilla CSS
+- **Animations**: Framer Motion
+- **Sound System**: Browser Web Audio API (Synthesizing chimes, pops, and fanfares)
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Get Started
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+2. Run development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
