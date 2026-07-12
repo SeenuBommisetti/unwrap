@@ -48,9 +48,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Footer / Minimal Debug Navigation Controls */}
       <footer className="w-full py-6 px-8 flex justify-between items-center z-10">
-        <span className="text-[10px] uppercase tracking-widest text-zinc-655">
-          Birthday Experience MVP
-        </span>
+        <div />
         
         {/* Navigation helpers for testing */}
         <div className="flex items-center space-x-4">
