@@ -187,7 +187,7 @@ export const ChallengeChapter: React.FC = () => {
       {/* Header Info */}
       <header className="z-10 px-6 max-w-md mx-auto">
         <span className="text-xs uppercase tracking-[0.25em] text-zinc-550 mb-3 font-semibold block">
-          Chapter 02
+          Almost there...
         </span>
         <h1 className="font-serif text-3xl md:text-4xl font-light mb-4 tracking-tight leading-tight">
           {correctPopped ? (

@@ -192,9 +192,7 @@ export const ScannerChapter: React.FC = () => {
       </AnimatePresence>
 
       <div className="z-10 flex flex-col items-center justify-center">
-        <span className="text-xs uppercase tracking-[0.25em] text-zinc-500 mb-4 font-semibold">
-          Chapter 01
-        </span>
+
         
         <h1 className="font-serif text-4xl md:text-5xl font-light mb-6 tracking-tight leading-tight transition-colors duration-500">
           {showConfirmationText ? (

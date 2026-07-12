@@ -164,7 +164,7 @@ export const GiftChapter: React.FC = () => {
       {/* TOP SECTION (Upper third of viewport) */}
       <div className="absolute top-10 md:top-14 left-0 right-0 z-20 flex flex-col items-center text-center px-6 max-w-xl mx-auto select-none pointer-events-none">
         <span className="text-xs uppercase tracking-[0.25em] text-zinc-550 mb-3 font-semibold">
-          Chapter 04
+          One last surprise...
         </span>
 
         <AnimatePresence mode="wait">

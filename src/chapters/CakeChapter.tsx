@@ -268,7 +268,7 @@ export const CakeChapter: React.FC = () => {
 
       <div className="z-10 flex flex-col items-center justify-center">
         <span className="text-xs uppercase tracking-[0.25em] text-zinc-550 mb-3 font-semibold">
-          Chapter 03
+          Make a wish.
         </span>
 
         {/* Dynamic Headers */}

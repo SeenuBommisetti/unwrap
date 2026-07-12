@@ -23,22 +23,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <span className="font-serif italic text-lg tracking-wider bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
           unwrap.
         </span>
-        
-        {/* Progress Bar / Indicator */}
-        <div className="flex items-center space-x-2">
-          {CHAPTERS.map((id, index) => (
-            <div
-              key={id}
-              className={`h-[3px] rounded-full transition-all duration-500 ${
-                index === currentIndex
-                  ? 'w-6 bg-zinc-200'
-                  : index < currentIndex
-                  ? 'w-3 bg-zinc-600'
-                  : 'w-1.5 bg-zinc-800'
-              }`}
-            />
-          ))}
-        </div>
       </header>
 
       {/* Main Experience Area */}
