@@ -63,10 +63,10 @@ export const FinalChapter: React.FC = () => {
             May this year bring you happiness,
           </p>
           <p className="text-zinc-350 text-base md:text-lg font-light leading-relaxed">
-            great memories,
+            wonderful memories,
           </p>
           <p className="text-zinc-350 text-base md:text-lg font-light leading-relaxed">
-            and countless reasons to smile.
+            and endless reasons to smile.
           </p>
         </motion.div>
 

@@ -98,7 +98,7 @@ const playRevealSound = () => {
 };
 
 export const GiftChapter: React.FC = () => {
-  const { nextChapter } = useExperience();
+  const { nextChapter, recipientName } = useExperience();
   const [ribbonDragged, setRibbonDragged] = useState(false);
   const [isAnticipating, setIsAnticipating] = useState(false);
   const [revealStage, setRevealStage] = useState<RevealStage>('idle');
@@ -177,8 +177,10 @@ export const GiftChapter: React.FC = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
               className="flex flex-col items-center"
             >
-              <h1 className="font-serif text-[clamp(1.75rem,6vw,2.75rem)] font-light text-amber-250 tracking-wide leading-tight mb-2">
-                ✨ Happy Birthday! ✨
+              <h1 className="font-serif text-[clamp(1.5rem,5.5vw,2.5rem)] font-light text-amber-250 tracking-wide leading-tight mb-2 px-4 text-center">
+                {recipientName && recipientName.trim() && recipientName !== 'Birthday Star'
+                  ? `✨ Happy Birthday, ${recipientName}! ✨`
+                  : '✨ Happy Birthday! ✨'}
               </h1>
               <p className="text-zinc-400 text-sm font-light leading-relaxed">
                 Best wishes to you!
@@ -195,12 +197,12 @@ export const GiftChapter: React.FC = () => {
               <h1 className="font-serif text-3xl md:text-4xl font-light mb-2 tracking-tight leading-tight">
                 One Last Surprise...
               </h1>
-              <p className="text-zinc-400 text-sm font-light leading-relaxed">
-                {isAnticipating
-                  ? 'Something is happening...'
-                  : revealStage === 'open' || revealStage === 'star_rising' || revealStage === 'transforming'
+              <p className="text-zinc-400 text-sm font-light px-4 leading-relaxed h-12 flex items-center justify-center mb-10">
+                {isBoxOpen
                   ? 'Watch closely...'
-                  : 'Slide the gold bow upward to untie the ribbon.'}
+                  : isAnticipating
+                  ? 'Something is happening...'
+                  : `This gift is especially for you, ${recipientName}`}
               </p>
             </motion.div>
           )}

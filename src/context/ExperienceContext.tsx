@@ -8,12 +8,23 @@ export const ExperienceContext = createContext<ExperienceContextType | undefined
 export const ExperienceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentChapter, setCurrentChapter] = useState<ChapterId>('intro');
   
-  // Hardcoded details for the MVP
-  const [state] = useState({
-    recipientName: 'Birthday Star',
-    senderName: 'Your Friend',
-    theme: 'elegant',
-  });
+  const getParam = (name: string, fallback: string): string => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name)?.trim() || fallback;
+    } catch (e) {
+      return fallback;
+    }
+  };
+
+  const [recipientName, setRecipientName] = useState(() => getParam('to', 'Birthday Star'));
+  const [senderName, setSenderName] = useState(() => getParam('from', 'Someone Special'));
+  const [theme] = useState('elegant');
+
+  const setNames = useCallback((recipient: string, sender: string) => {
+    setRecipientName(recipient.trim() || 'Birthday Star');
+    setSenderName(sender.trim() || 'Someone Special');
+  }, []);
 
   const nextChapter = useCallback(() => {
     const currentIndex = CHAPTERS.indexOf(currentChapter);
@@ -42,12 +53,15 @@ export const ExperienceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   return (
     <ExperienceContext.Provider
       value={{
-        ...state,
+        recipientName,
+        senderName,
+        theme,
         currentChapter,
         nextChapter,
         prevChapter,
         resetExperience,
         setChapter,
+        setNames,
       }}
     >
       {children}

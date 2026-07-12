@@ -18,4 +18,5 @@ export interface ExperienceContextType extends ExperienceState {
   prevChapter: () => void;
   resetExperience: () => void;
   setChapter: (chapter: ChapterId) => void;
+  setNames: (recipient: string, sender: string) => void;
 }

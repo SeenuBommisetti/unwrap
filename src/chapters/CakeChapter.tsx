@@ -128,7 +128,7 @@ const Candle: React.FC<CandleProps> = ({
 };
 
 export const CakeChapter: React.FC = () => {
-  const { nextChapter } = useExperience();
+  const { nextChapter, recipientName } = useExperience();
   const [hasMicAccess, setHasMicAccess] = useState<boolean | null>(null);
   const [blowProgress, setBlowProgress] = useState(0);
   const [isBlowing, setIsBlowing] = useState(false);
@@ -285,7 +285,7 @@ export const CakeChapter: React.FC = () => {
                 Wish Captured
               </h1>
               <p className="text-zinc-400 text-sm font-light px-4 leading-relaxed h-12 flex items-center justify-center">
-                Your wish has been safely stored.
+                Beautiful wish, {recipientName} ✨
               </p>
             </motion.div>
           ) : (

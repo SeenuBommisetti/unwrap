@@ -34,7 +34,7 @@ const generateSparkles = (count: number): Sparkle[] => {
 };
 
 export const IntroChapter: React.FC = () => {
-  const { nextChapter } = useExperience();
+  const { nextChapter, recipientName } = useExperience();
   const [stage, setStage] = useState<IntroStage>('hey');
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
@@ -134,9 +134,14 @@ export const IntroChapter: React.FC = () => {
               exit="exit"
               className="flex flex-col items-center justify-center px-4"
             >
-              <h1 className="font-serif text-4xl md:text-6xl font-light text-zinc-100 tracking-tight leading-tight mb-12 text-center max-w-2xl">
-                Are you today's birthday star?
-              </h1>
+              <div className="flex flex-col items-center justify-center text-center max-w-2xl mb-12">
+                <h1 className="font-serif text-2xl md:text-4xl font-light text-zinc-350 tracking-tight leading-tight mb-3">
+                  We've been waiting for...
+                </h1>
+                <h2 className="font-serif text-4xl md:text-6xl font-medium text-amber-300 tracking-tight leading-tight">
+                  {recipientName}
+                </h2>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <motion.button
                   onClick={handleYes}
